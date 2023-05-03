@@ -5,9 +5,12 @@ Ver    : 3.0
 Date   : 2023-05-03
 Des    : Describe what these codes do.
 
-*** Version History
-    V2.0   2023-01-01: Add ....
-    V1.0   2022-12-31: First Edition
+Version History
+    V2.0   2023-01-01: Add ....... Add ......  Add ......  Add ......  Add .....
+                       and Remove ......
+    V1.0   2022-12-31: First Edition. Description of your codes. Description of 
+                       your codes. Description of your codes. Description of 
+                       your codes.
 
 *******************************************************************************/
 *>>>>>>>>>>>>>>>>>>>> Set the Directories, Data, and Macro
@@ -19,6 +22,9 @@ Des    : Describe what these codes do.
     set more off
     cap log close _all
     set seed 12345
+
+    *** Stata version control
+    version 17.0
 
     *** Path
     global p_project ""
@@ -45,34 +51,36 @@ Des    : Describe what these codes do.
 // Check and auto install the dependent packages
 local dep_packages winsor2 reghdfe outreg2 ppmlhdfe 
 local dep_packages_net "svmat2" 
-
-foreach pkg of local dep_packages {
-	dis ""
-	dis in red "Checking `pkg'"
-    capture which `pkg'
-    if _rc != 0 {
-		dis in red "Will install `pkg'"    
-		ssc install `pkg', replace
-    }
-	else {
-		dis in red "`pkg' already installed. OK."
-	}
-}
-
-foreach pkg of local dep_packages_net {
-    dis ""
-    dis in red "Checking `pkg'"
-    capture which `pkg'
-    if _rc != 0 {
-        dis in red "Will install `pkg'"
-        if `pkg' == "svmat2" {
-            net install dm79.pkg, from("from http://www.stata.com/stb/stb56")
+{
+    foreach pkg of local dep_packages {
+        dis ""
+        dis in red "Checking `pkg'"
+        capture which `pkg'
+        if _rc != 0 {
+            dis in red "Will install `pkg'"    
+            ssc install `pkg', replace
+        }
+        else {
+            dis in red "`pkg' already installed. OK."
         }
     }
-    else {
-        dis in red "`pkg' already installed. OK."
+
+    foreach pkg of local dep_packages_net {
+        dis ""
+        dis in red "Checking `pkg'"
+        capture which `pkg'
+        if _rc != 0 {
+            dis in red "Will install `pkg'"
+            if `pkg' == "svmat2" {
+                net install dm79.pkg, from("from http://www.stata.com/stb/stb56")
+            }
+        }
+        else {
+            dis in red "`pkg' already installed. OK."
+        }
     }
 }
+
 
 ********************************************************************************
 *** Programs
