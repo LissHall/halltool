@@ -1,4 +1,4 @@
 # Hall's STATA Toolbox
 
-## Stata-do-head
-General initial steps before your stata codings.
+
+1. General initial steps before your stata codings. [ini.do](/ini.do)
