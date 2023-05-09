@@ -49,36 +49,15 @@ Version History
 ********************************************************************************
 *** Dependency Checking
 // Check and auto install the dependent packages
-local dep_packages winsor2 reghdfe outreg2 ppmlhdfe 
-local dep_packages_net "svmat2" 
-{
-    foreach pkg of local dep_packages {
-        dis ""
-        dis in red "Checking `pkg'"
-        capture which `pkg'
-        if _rc != 0 {
-            dis in red "Will install `pkg'"    
-            ssc install `pkg', replace
-        }
-        else {
-            dis in red "`pkg' already installed. OK."
-        }
-    }
-
-    foreach pkg of local dep_packages_net {
-        dis ""
-        dis in red "Checking `pkg'"
-        capture which `pkg'
-        if _rc != 0 {
-            dis in red "Will install `pkg'"
-            if `pkg' == "svmat2" {
-                net install dm79.pkg, from("from http://www.stata.com/stb/stb56")
-            }
-        }
-        else {
-            dis in red "`pkg' already installed. OK."
-        }
-    }
+// need whichdep
+cap which whichdep
+if _rc == 0 {
+    whichdep ///
+        winsor2 ///
+        reghdfe ///
+        outreg2 ///
+        ppmlhdfe ///  <<--- Add packages used here
+        , net(dm79.pkg "http://www.stata.com/stb/stb56")
 }
 
 
