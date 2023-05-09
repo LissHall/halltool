@@ -1,5 +1,6 @@
 # Hall's STATA Toolbox
 
+This is an Index Page for Hall's Stat tools.
 
 1. General initial steps before your stata codings. 👉 [ini.do](/ini.do)
 2. Install and update all dependent packages at once. 👉 [whichdep.ado](https://github.com/LissHall/whichdep)
