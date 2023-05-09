@@ -1,0 +1,9 @@
+v 1.0
+d 'WHICHDEP': whichdep
+d 
+d Distribution-Date:   20230509
+d License: MIT
+d 
+F whichdep.ado
+f whichdep.ado
+f whichdep.sthlp

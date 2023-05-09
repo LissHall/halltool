@@ -1,0 +1,7 @@
+v 1.0
+d Materials by Xinya Hao
+d City University of Hong Kong
+d lisshall717@gmail.com
+d https://econometrics.club/
+
+p whichdep
