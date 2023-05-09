@@ -1,12 +1,9 @@
+*! version 1.0  09 May 2023
+*! Xinya Hao (Hall) xyhao5-c@my.cityu.edu.hk
+
 cap program drop whichdep
 program define whichdep
-    /*
-    This program checks whether dependent packages are installed. 
-    Auto Install from ssc
-
-    Liss Hall. Version 1.0
-    */
-    
+   
     capture syntax anything(name = pkglist) [,net(string)] 
 
     // Check SSC packages

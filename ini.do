@@ -28,13 +28,17 @@ Version History
 
     *** Path
     global p_project ""
+        global p_data "$p_project/Data"
+            global p_raw "$p_data/Raw"
+            global p_clean "$p_data/Clean"
+        
         // All result files are saved to:
         global p_result "$p_project/Results"
             global p_plots "$p_result/Plots"
         
-        global p_data "$p_project/Data"
-            global p_raw "$p_data/Raw"
-            global p_clean "$p_data/Clean"
+        // Add ado path
+        cap adopath + "$p_project/Programs"
+
 
     cd "$p_result"
 
