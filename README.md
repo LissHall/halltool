@@ -7,14 +7,11 @@ This is an Index Page for Hall's Stat tools.
 
 
 # How to install
-For `.ado` programs, you can try do install it using `github` in Stata.
-For example, the `whichdep`:
+You can install `halltool` using `github` in Stata.
 
 ```{stata}
-    github install LissHall/whichdep
+    github install LissHall/halltool
 ```
-
-
 
 If you do not have `github` installed, try run this in your Stata:
 
