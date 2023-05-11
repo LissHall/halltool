@@ -7,7 +7,7 @@ Click  👉 [hall-stata-toll](https://github.com/LissHall/hall-stata-tool) to vi
 You can install `whichdep` directly using `github` in Stata:
 
 ```{js}
-    github install LissHall/whichdep
+    github install LissHall/halltool
 ```
 
 If you do not have `github` installed, try run this in your Stata:
