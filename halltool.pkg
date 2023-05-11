@@ -1,0 +1,10 @@
+v 1.0
+d 'HALLTOOL': halltool
+d Hall's toolkit
+d Distribution-Date:   20230511
+d License: MIT
+d 
+F /ado_files/whichdep.ado
+f /ado_files/whichdep.ado
+f /help_files/whichdep.sthlp
+f ini.do
