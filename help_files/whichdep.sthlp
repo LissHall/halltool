@@ -14,6 +14,7 @@
 [
 {cmdab:net:}{cmd:(}string{cmd:)}
 {cmdab:q:}uick
+{cmdab:r:}eplace
 ]
 
 
@@ -28,6 +29,8 @@ You can also use the net() option to give packages to be installed with {help ne
 {title:Options}
 
     {cmdab:q:}uick For faster checks, only existence is checked, updates are not checked.
+
+    {cmdab:r:}eplace Replace with new version if new version found.
 
 {p 4 4 2}{cmd:net(}{it:string}{cmd:)} specifies the packages and addresses for net install. 
 
