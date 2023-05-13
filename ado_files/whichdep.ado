@@ -4,9 +4,9 @@
 cap program drop whichdep
 program define whichdep
    
-    capture syntax anything(name = pkglist) [,net(string) *] 
+    capture syntax anything(name = pkglist) [,net(string) Replace Quick *] 
 
-    if "`options'" != "q" & "`options'" != "quick" & "`options'" != "" {
+    if "`options'" != "" {
         dis in red "Error. `options' not allowed"
         exit
     }
@@ -14,15 +14,15 @@ program define whichdep
     // Check SSC packages
     foreach pkg of local pkglist {
         // check installation if quick option specified
-        if "`options'" == "q" |  "`options'" == "quick" {
+        if "`quick'" == "quick" {
             qui capture which `pkg'
-            if _rc == 0{
+            if _rc == 0 {
                 dis "`pkg' already installed"
                 continue
             }
         }
         
-        qui cap ssc install `pkg'
+        qui cap ssc install `pkg' , `replace'
         if _rc != 0 {
             local fail_install = "`fail_install' `pkg'"
         }
@@ -46,7 +46,7 @@ program define whichdep
             }
 
             local j = `i' + 1
-            cap net install "``i''" , from("``j''")
+            cap net install "``i''" , from("``j''") `replace'
             if _rc != 0 {
                 local fail_install = "`fail_install' ``i''"
             }
@@ -59,7 +59,7 @@ program define whichdep
 
     // Print the Failed Packages
     local fail_install = trim("`fail_install'")
-    if "`options'" == "q" |  "`options'" == "quick" {
+    if "`quick'" == "quick" {
             dis in red "Quick Check. Programs may not be up to date"
     }
     if "`fail_install'" == "" {
