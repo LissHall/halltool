@@ -18,6 +18,17 @@ If you do not have `github` installed, try run this in your Stata:
 
 # How to use and examples
 
+Syntax:
+```{js}
+    whichdep pkglist [, net(pkg1 "address1" pkg2 "address2" ...) Quick Replace]
+```
+Options:
+```{js}
+    net(pkg "add" ...) - Net install `pkg` from `add`
+    quick              - Do not check version update
+    replace            - Install new version if new version found
+```
+
 Try `help whichdep` after installation:
 
 ```{js}

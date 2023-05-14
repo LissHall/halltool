@@ -22,7 +22,7 @@ program define whichdep
             }
         }
         
-        qui cap ssc install `pkg' , `replace'
+        cap ssc install `pkg' , `replace'
         if _rc != 0 {
             local fail_install = "`fail_install' `pkg'"
         }
