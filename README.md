@@ -19,7 +19,7 @@ and uninstall:
     github uninstall halltool
 ```
 
-If you do not have [`github`] installed, try run this in your Stata:
+If you do not have [`github`](https://github.com/haghish/github) installed, try run this in your Stata:
 
 ```{stata}
     net install github, from("https://haghish.github.io/github/")
