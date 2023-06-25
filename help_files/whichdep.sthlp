@@ -1,7 +1,7 @@
 {smcl}
 {* *! version 1.1 2023/05/09}{...}
 {hline}
-{cmd:help for {hi:whichdep}}{right: ({browse "https://econometrics.club/":blog})}{right: ({browse "https://github.com/LissHall":github})}
+{cmd:help for {hi:whichdep}}{right: ({browse "https://econometrics.club/":blog})}{right: ({browse "https://github.com/LissHall/halltool":github})}
 {hline}
 
 {title:Which Dependencies}

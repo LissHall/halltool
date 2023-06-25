@@ -1,10 +1,13 @@
-v 1.0
+v 1.1
 d 'HALLTOOL': halltool
 d Hall's toolkit
-d Distribution-Date:   20230511
+d Distribution-Date:   20230625
 d License: MIT
 d 
 F /ado_files/whichdep.ado
-f /ado_files/whichdep.ado
+f /ado_files/xpctile.ado
+f /ado_files/haversine.ado
 f /help_files/whichdep.sthlp
+f /help_files/xpctile.sthlp
+f /help_files/haversine.sthlp
 f ini.do
