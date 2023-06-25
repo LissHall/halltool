@@ -19,7 +19,7 @@
 {title:Description}
 
 {p 4 4 2}
-{cmd:xpctile} returns the percentile of a given value in a variable
+{cmd:xpctile} returns the percentile of a given value in a variable.
 
 {p 4 4 2}
 The returned values are saved in {cmd: rclass}. Try {stata "return list":  returen list} to see the returned values.

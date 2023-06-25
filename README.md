@@ -1,9 +1,11 @@
 # Hall's STATA Toolbox
 
-This is an Index Page for Hall's Stat tools.
+This is an Index Page for Hall's Stata tools.
 
 1. 👉 [ini.do](/ini.do) General initial steps before your stata codings. 
 2. 👉 [whichdep](/README_whichdep.md) Install and update all specified `ssc` and `net` packages at once. 
+3. 👉 [xpctile] The percentile of a given `value` in a `variable`.
+4. 👉 [haversine] [Haversine Formula](https://en.wikipedia.org/wiki/Haversine_formula) to calculate the distance (km) between two locations with `latitude` and `longitude` coordinates.
 
 
 # How to install
