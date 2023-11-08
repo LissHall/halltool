@@ -36,6 +36,8 @@ The returned values are saved in {cmd: rclass}. Try {stata "return list":  retur
 {phang2}{inp:.} {stata "ret list":  ret list}{p_end}
 {phang2}{inp:.}  scalars:{p_end}
 {phang2}{inp:.}  {space 8}(pct) =  90.54054054054053{p_end}
+{phang2}{inp:.} {stata "dis r(pct)":  dis r(pct)}{p_end}
+{phang2}{inp:.}  {space 8}90.540541{p_end}
 
 {title:Author}
 

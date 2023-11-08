@@ -1,5 +1,5 @@
 {smcl}
-{* *! version 1.1 2023/05/09}{...}
+{* *! version 1.2 Nov 08, 2023}{...}
 {hline}
 {cmd:help for {hi:whichdep}}{right: ({browse "https://econometrics.club/":blog})}{right: ({browse "https://github.com/LissHall/halltool":github})}
 {hline}
@@ -13,7 +13,6 @@
 {cmdab:whichdep} {varlist} ,  
 [
 {cmdab:net:}{cmd:(}string{cmd:)}
-{cmdab:q:}uick
 {cmdab:r:}eplace
 ]
 
@@ -28,9 +27,7 @@ You can also use the net() option to give packages to be installed with {help ne
 
 {title:Options}
 
-    {cmdab:q:}uick For faster checks, only existence is checked, updates are not checked.
-
-    {cmdab:r:}eplace Replace with new version if new version found.
+    {cmdab:r:}eplace: Replace with new version if new version found.
 
 {p 4 4 2}{cmd:net(}{it:string}{cmd:)} specifies the packages and addresses for net install. 
 
