@@ -1,3 +1,4 @@
+*! version 1.1 10 Apr 2024
 *! version 1.0 09 May 2023
 *! Xinya Hao (Hall) xyhao5-c@my.cityu.edu.hk
 *** An enhanced version of rm/erase
@@ -5,7 +6,11 @@
 cap program drop rm2
 program define rm2
 
-    capture syntax [anything(name = filelist)] [,Type(string) Path(string) *]
+    capture syntax [anything(name = filelist)] ///
+        [, ///
+        Type(string) ///
+        Path(string) ///
+        *]
 
     // No punishment for unrecognized options.
     if "`options'" != "" {
@@ -23,7 +28,7 @@ program define rm2
         if "`path'" != "" {
             local file = "`path'/`file'"
         }
-        qui rm "`file'"
+        qui cap rm "`file'"
 
         local ++i
     }
@@ -35,7 +40,7 @@ program define rm2
                 local path "."
             }
 
-            local files: dir "`path'" files "*.`tk'"
+            local files: dir "`path'" files "*`tk'"
             foreach file in `files' {
                 if "`path'" != "" {
                     local file = "`path'/`file'"

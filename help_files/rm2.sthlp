@@ -21,7 +21,7 @@
     filename: Zero, 1, or multiple file names. Separated by spaces
 
     {cmdab:t:}ype(filetype): One or multiple file types. Separated by spaces. 
-                    All files in the format of .filetype will be deleted.
+                    All files with names ending in "filetype" will be deleted.
 
     {cmdab:p:}ath(filepath): You can specify the specific path to find and delete the files. 
                     If not specified, the current folder will be used.
@@ -29,7 +29,7 @@
 {title:Description}
 
 {p 4 4 2}
-{cmd:rm2} rm/erase multiple files in one command.
+{cmd:rm2} rm/erase multiple files in one command. Will ignore the error and continue to delete other files if a specified file does not exist.
 
 {p 4 4 2}
 You can specify the specific file ({cmd:filename}) or a file type ({cmd:filetype}).
@@ -54,16 +54,16 @@ This commands utilize the{stata "help rm": rm/erase} command to delete files. Th
 {phang2}{inp:.} rm2 "results1.txt" "results2.txt", p("this/is/my/folder"){p_end}
 
 {phang2} To delete all .txt file in the current folder{p_end}
-{phang2}{inp:.} rm2, t(txt){p_end}
+{phang2}{inp:.} rm2, t(.txt){p_end}
 
 {phang2} To delete all .txt file in a specific folder{p_end}
-{phang2}{inp:.} rm2, t(txt) p("this/is/my/folder"){p_end}
+{phang2}{inp:.} rm2, t(.txt) p("this/is/my/folder"){p_end}
 
 {phang2} To delete all .txt and .xls file in a specific folder{p_end}
-{phang2}{inp:.} rm2, t(txt xls) p("this/is/my/folder"){p_end}
+{phang2}{inp:.} rm2, t(.txt .xls) p("this/is/my/folder"){p_end}
 
 {phang2} To delete -results.xls- and all .txt file in a specific folder{p_end}
-{phang2}{inp:.} rm2 results.xls, t(txt) p("this/is/my/folder"){p_end}
+{phang2}{inp:.} rm2 results.xls, t(.txt) p("this/is/my/folder"){p_end}
 
 
 {title:Author}
