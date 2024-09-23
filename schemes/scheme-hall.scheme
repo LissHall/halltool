@@ -1,0 +1,226 @@
+*! version 1.0.1, Hall, 23jul2024
+*! Xinya Hao (Hall), CityU
+*! xyhao5-c@my.cityu.edu.hk
+
+// Based on s2color
+// Similar to stcolor used in Stata18 (v1.0.0, 02mar2023)
+
+#include s2color
+
+sequence 1291
+label "hall"
+
+* size
+graphsize             	3
+graphsize 	x           3
+graphsize 	y           2
+gsize 		pbarlabel	small
+symbolsize 	p       	small
+
+* size of ...
+gsize 	heading 		8-pt
+gsize 	subheading 		6-pt
+gsize 	subheading_gs 	6-pt
+gsize 	body			6-pt
+gsize 	small_body		6-pt
+gsize 	text_option		6-pt
+gsize 	tick_label		6-pt
+gsize 	minortick_label 6-pt
+
+* legend
+numstyle 		legend_cols    		1
+gsize 			legend_key_xsize  	8
+clockdir 		legend_position     2
+clockdir 		by_legend_position  2
+margin 			leg_title        	medsmall
+textboxstyle	leg_title        	legend_title
+
+* by graph subtitle textbox fill and outline color
+textboxstyle 	subtitle     		subheading_gs
+color 			bylabel_outline     white%0
+
+* by graph imargin
+margin 			by_indiv         allsides-ms
+
+* axis
+// all axies will be supressed
+// yesno 		draw_major_vgrid 		no
+// yesno 		draw_major_hgrid 		no
+// yesno 		draw_minor_vgrid 		no
+// yesno 		draw_minor_hgrid 		no
+// yesno 		grid_draw_min 			no
+// yesno 		grid_draw_max 			no
+linepattern 	grid  					solid
+linepattern 	major_grid  			solid
+linepattern 	minor_grid  			solid
+linewidth 		grid 					vthin
+linewidth 		major_grid 				vthin
+linewidth 		minor_grid 				vthin
+anglestyle 		vertical_tick   		horizontal
+yesno 			draw_major_hgrid   		yes
+yesno 			grid_draw_max       	yes
+color 			major_grid   			gs15
+
+// yesno 			extend_majorgrid_low 	no
+// yesno 			extend_majorgrid_high 	no
+// yesno 			extend_minorgrid_low 	no
+// yesno 			extend_minorgrid_high 	no
+
+// axies will be supressed
+color axisline none
+
+
+* Plotregion
+color 		plotregion 			none
+linestyle 	plotregion 			foreground
+// you can add plotregion(lalign(outside)) in yout graph commands
+
+
+* colors
+color background   		white
+color heading			black
+color legend_line      	white
+color box              	white
+color textbox          	white
+color mat_label_box    	white
+
+color p    black
+color p1   "0 114 178"
+color p2   "214 68 74" 
+color p3   stc3
+color p4   stc4
+color p5   stc5
+color p6   stc6
+color p7   stc7
+color p8   stc8
+color p9   stc9
+color p10  stc10
+color p11  stc11
+color p12  stc12
+color p13  stc13
+color p14  stc14
+color p15  stc15
+
+// linewidth p   	thick
+// linewidth p1  	thick
+// linewidth p2  	thick
+// linewidth p3  	thick
+// linewidth p4  	thick
+// linewidth p5  	thick
+// linewidth p6  	thick
+// linewidth p7  	thick
+// linewidth p8  	thick
+// linewidth p9  	thick
+// linewidth p10  	thick
+// linewidth p11  	thick
+// linewidth p12  	thick
+// linewidth p13  	thick
+// linewidth p14  	thick
+// linewidth p15  	thick
+
+* Histograms
+color 		histogram 			"0 114 178"
+color 		histogram_line		"0 114 178*0.7"
+linewidth 	histogram  			vthin 	
+intensity 	histogram  			inten90
+
+
+* matrix
+color matrix         "0 114 178"   
+color matrixmarkline "0 114 178"    
+
+* refline
+linepattern 	xyline		dash
+color 			xyline      black
+color 			refline     black
+
+* ci 
+// ci > blue with intensity
+color ci_line        "0 114 178"
+color ci_arealine    "0 114 178%0"
+color ci_area        "157 214 233%50"
+color ci_symbol      "0 114 178"
+
+// ci2 > gray with intensity
+color ci2_line       black
+color ci2_arealine   white%0
+color ci2_area       "gs12%40"
+color ci2_symbol     black
+
+linewidth ci    thick
+linewidth ci2   thick
+
+* area // strawberry
+color p1area "214 68 74" 
+color p2area "214 68 74%90" 
+color p3area "214 68 74%80"
+color p4area "214 68 74%70" 
+color p5area "214 68 74%60" 
+color p6area "214 68 74%50" 
+color p7area "214 68 74%40" 
+color p8area "214 68 74%30" 
+color p9area "214 68 74%20" 
+color p10area "214 68 74%10" 
+color p11area white%0
+color p12area white%0
+color p13area white%0
+color p14area white%0
+color p15area white%0
+
+linewidth p1area none
+linewidth p2area none
+linewidth p3area none
+linewidth p4area none
+linewidth p5area none
+linewidth p6area none
+linewidth p7area none
+linewidth p8area none
+linewidth p9area none
+linewidth p10area none
+linewidth p11area none
+linewidth p12area none
+linewidth p13area none
+linewidth p14area none
+linewidth p15area none
+
+* scatter
+color 		p1markline 		black
+linewidth 	p1mark 			vvthin
+color 		p1markfill 		"0 114 178%80"
+
+color 		p2markline 		black
+linewidth 	p2mark 			vvthin
+color 		p2markfill 		"214 68 74%80"
+
+
+* fp
+areastyle fpciarea   fpciarea
+areastyle fpgrparea  fpgrp
+areastyle fpallarea  fpall
+
+color fp             "0 114 178"
+color fp_line        "0 114 178"
+color fp_symbol      "0 114 178"
+color fpgrp          "214 68 74"
+color fpgrp_arealine "214 68 74"
+color fpgrp_area     "214 68 74"
+color fpgrp_line     "214 68 74"
+color fpgrp_symbol   "214 68 74"
+color fpall          stc3
+color fpall_arealine stc3
+color fpall_area     stc3
+color fpall_line     stc3
+color fpall_symbol   stc3
+color fpesinside_symbol stc4
+color fpesinside_line stc4
+
+* lpoly
+yesno lpoly_legend_usescheme	yes
+
+gsize axis_title_gap  tiny
+
+* zyx2legend
+gsize zyx2rowgap            tiny
+
+
+* end: scheme

@@ -1,7 +1,8 @@
-v 1.2
-d Materials by Xinya Hao
+v 1.4
+d Materials by Xinya Hao (Hall)
 d City University of Hong Kong
 d lisshall717@gmail.com
+d xyhao5-c@my.cityu.edu.hk
 d https://econometrics.club/
 
 p halltool

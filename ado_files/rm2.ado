@@ -1,21 +1,26 @@
-*! version 1.1 10 Apr 2024
-*! version 1.0 09 May 2023
-*! Xinya Hao (Hall) xyhao5-c@my.cityu.edu.hk
-*** An enhanced version of rm/erase
+*! version 1.2, 23sep2024.
+* version 1.1, 10apr2024
+* version 1.0, 9may2023
+* Xinya Hao (Hall) xyhao5-c@my.cityu.edu.hk
 
+*** An enhanced version of rm/erase
 cap program drop rm2
 program define rm2
-
-    capture syntax [anything(name = filelist)] ///
+    version 12
+    syntax [anything(name = filelist)] ///
         [, ///
         Type(string) ///
         Path(string) ///
-        *]
+        Report ///
+        * ]
 
-    // No punishment for unrecognized options.
+    *** No punishment for unrecognized options.
     if "`options'" != "" {
-        di as error "Unrecognized option in `options'. Ignored"
+        di as red "Unrecognized option in `options'. Ignored."
     }
+
+    *** rmccount
+    local rmcount 0
 
     *** Remove the files specified
     tokenize `"`filelist'"'
@@ -28,7 +33,11 @@ program define rm2
         if "`path'" != "" {
             local file = "`path'/`file'"
         }
-        qui cap rm "`file'"
+        cap rm "`file'"
+        if _rc == 0 {
+            local filerm_`rmcount' "`file'"
+            local ++rmcount
+        }
 
         local ++i
     }
@@ -45,7 +54,25 @@ program define rm2
                 if "`path'" != "" {
                     local file = "`path'/`file'"
                 }
-                qui rm "`file'"
+                cap rm "`file'"
+                if _rc == 0 {
+                    local filerm_`rmcount' "`file'"
+                    local ++rmcount
+                }
+            }
+        }
+    }
+
+    *** Report the files removed
+    if "`report'" != "" {
+        dis "----------------------------------------"
+        if `rmcount' == 0 {
+            di "No files have been removed."
+        }
+        else {
+            di "The following files have been removed:"
+            forvalues i = 0/`rmcount' {
+                di "`filerm_`i''"
             }
         }
     }
