@@ -12,7 +12,14 @@ Commands included in Hall's ToolBox:
    - Enhanced version of `rm`/`erase` command. 
    - Delete multiple files and delete files by file types in one command.
    - Avoid errors due to file not found.
-
+5. `gradd_ab`
+   - Add asterisk brackets to a bar graph.
+<div style="width:100%;text-align:center;">
+<p>
+    <img alt="_eg_gradd_ab" src="https://github.com/LissHall/halltool/blob/main/pngs/_eg_gradd_ab.png?raw=true" style="width:75%;"/>
+</p>
+<p>Origional bar plot (left)  --->  After <i>gradd_ab</i></p>
+</div>
 
 # How to install
 You can install [`halltool`](https://github.com/LissHall/halltool) using [`github`](https://github.com/haghish/github) in Stata.
