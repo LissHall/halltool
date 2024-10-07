@@ -20,7 +20,18 @@ sysuse auto, clear
         , ///
         ylabel(5000(1000)11000) ///
         legend(off) ///
-        xlabel(0 "Domestic" 1 "Foreign")
+        xlabel(0 "Domestic" 1 "Foreign") ///
+        saving(b1.gph, replace)
         
     *** Add asterisk brackets
     gradd_ab errorbar_h foreign, left(0) right(1) sig($sig_stars)
+    
+    *** Save the graph
+    graph save b2.gph, replace
+    graph combine b1.gph b2.gph, ///
+        col(2)
+    graph export _eg_gradd_ab.png, replace
+
+    rm b1.gph
+    rm b2.gph
+
