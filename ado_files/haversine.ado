@@ -3,7 +3,7 @@
 cap program drop haversine
 program define haversine
 
-    version 12.0
+    version 12
 
     // accept a varlist of 4 variables
     syntax varlist(min=4 max=4) [if] [in], [Gen(string)] Replace

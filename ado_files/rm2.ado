@@ -4,9 +4,11 @@
 * Xinya Hao (Hall) xyhao5-c@my.cityu.edu.hk
 
 *** An enhanced version of rm/erase
-cap program drop rm2
+//cap program drop rm2
 program define rm2
+    
     version 12
+    
     syntax [anything(name = filelist)] ///
         [, ///
         Type(string) ///

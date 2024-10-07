@@ -1,4 +1,7 @@
-*! version 1.1.3, Hall, 21sep2024.
+*! version 1.1.4, Hall, 2oct2024.
+    // Fix the within_interval bug.
+    // Add meqb/beqm option.
+* version 1.1.3, Hall, 21sep2024.
     // Fix the ITT calculation.
 * version 1.1.2, Hall, 20sep2024. 
     // Fix the %9.3f errors.
@@ -41,12 +44,16 @@ program define hall_bunching, rclass
             NOINTeger ///
             second ///
             dots ///
+            meqb /// Left: factual > counterfactual
+            beqm ///
+            tolerance(integer 10) ///
+            strictdbm ///
         ]
-    
+
     *** Clear related scalars in case of re-run --------------------------------
     clean_my_scalars 1
+    
     *** ------------------------------------------------------------------------
-
     local yvar : word 1 of `anything'
     scalar cutoff = `cutoff'
     if "`qmax'" != "" {
@@ -69,6 +76,11 @@ program define hall_bunching, rclass
 
     if "`intl'" == "" & "`fixintl'" == "" {
         dis as error "Please specify either intl() or fixintl()."
+        error 198
+    }
+
+    if "`meqb'" != "" & "`beqm'" != "" {
+        dis as error "You cannot specify both meqb and beqm."
         error 198
     }
 
@@ -142,7 +154,8 @@ qui {
 *** Data driven: est best q and Int --------------------------------------------
 // suppress the output 
 qui {
-    mat _est_mse = J(1,4,.)
+    mat _est_mse = J(1,7,.)
+    
     * Start looping q
     // the dots
     if "`dots'" != "" {
@@ -220,8 +233,61 @@ qui {
 
                 // Save MSE
                 mat mse = e(rmse)^2
-                mat _est_row = (`q', `Int_u', `Int_l', mse[1,1])
+
+                // calculate M, B, and DMB
+                if "`meqb'" != "" | "`beqm'" != "" {
+                    cap drop freq_predict_xb
+                    predict freq_predict_xb, xb
+
+                    if `Int_u' == 0 & `Int_l' == 0{
+                        // "The Int_u and Int_l cannot be 0 at the same time. Cannot calculate M, B, and DMB."
+                        local _est_Mhat = .
+                        local _est_Bhat = .
+                        local _est_DMB = .
+                    }
+                    else {
+                        forvalues i = 1/`=scalar(_NUM_I_indicator)' {
+                            gen _del_coef_I_`i' = _b[_I_indicator_`i'] * _I_indicator_`i'
+                        }
+
+                        cap drop _del_coef_I_total
+                        cap drop freq_predict_adj // the counterfactual freq
+                        egen _del_coef_I_total = rowtotal(_del_coef_I_*)
+                        gen freq_predict_adj = freq_predict - _del_coef_I_total
+
+                        // the actual - counterfactual
+                        cap drop _freq_diff_acf
+                        gen _freq_diff_acf = freq - freq_predict_adj
+
+                        // calculate _est_Mhat and _est_Bhat
+                        // Mhat is always positive
+                        // Bhat is always negative
+                        cap drop _est_Mhat
+                        cap drop _est_Bhat
+                        if "`meqb'" != "" {
+                            egen _est_Mhat = sum(cond((__basis_bin_diff >= -1 * `Int_l' & __basis_bin_diff <= 0) & _freq_diff_acf > 0, _freq_diff_acf, .))
+                            egen _est_Bhat = sum(cond((__basis_bin_diff > 0 & __basis_bin_diff <= `Int_u') & _freq_diff_acf < 0, _freq_diff_acf, .))
+                        }
+                        else {
+                            egen _est_Mhat = sum(cond((__basis_bin_diff >= 0 & __basis_bin_diff <= `Int_u') & _freq_diff_acf > 0, _freq_diff_acf, .))
+                            egen _est_Bhat = sum(cond((__basis_bin_diff >= -1 * `Int_l' & __basis_bin_diff < 0) & _freq_diff_acf < 0, _freq_diff_acf, .))
+                        }
+
+                        local _est_Mhat = _est_Mhat
+                        local _est_Bhat = _est_Bhat
+                        local _est_DMB = abs(_est_Mhat + _est_Bhat)
+                    }
+                }
+                else {
+                    local _est_Mhat = .
+                    local _est_Bhat = .
+                    local _est_DMB = .
+                }
+
+                // mat
+                mat _est_row = (`q', `Int_u', `Int_l', mse[1,1], `_est_Mhat', `_est_Bhat', `_est_DMB')
                 mat _est_mse = _est_mse \ _est_row
+                
                 restore // <<< RESTORE HERE
                 
                 *** The _dots prints
@@ -243,6 +309,32 @@ qui {
         ren _est_mse2 var_est_mse2
         ren _est_mse3 var_est_mse3
         ren _est_mse4 var_est_mse4
+        ren _est_mse5 var_est_Mhat
+        ren _est_mse6 var_est_Bhat
+        ren _est_mse7 var_est_DMB
+
+        // if the meqb or beqm is specified
+        // then use the best fit only for the one with DMB < tolerance
+        if "`meqb'" != "" | "`beqm'" != "" {
+            su if var_est_DMB < `tolerance'
+            if `r(N)' == 0 {
+                if "`strictdbm'" != "" {
+                    nois dis _newline
+                    nois dis as error "Not possible to find the best q and Ints with DMB <= `tolerance'."
+                    error 499
+                }
+                dis _newline
+                nois dis as red "Not possible to find the best q and Ints with DMB <= `tolerance'. Will ignore the tolerance."
+            }
+            else {
+                keep if var_est_DMB <= `tolerance'
+                nois dis _newline
+                nois dis as red "`meqb'`beqm' specified. The best fit is the (q, l, u) with the smallest MSE & DMB <= `tolerance'."
+            }
+
+            // sort again
+            sort var_est_mse4
+        }
 
         // save and return the best results
         scalar _best_q = var_est_mse1[1]
@@ -251,6 +343,9 @@ qui {
         scalar _best_Int_l = var_est_mse3[1]
         scalar _best_Int_l_show = -1 * var_est_mse3[1] + `=scalar(cutoff)'
         scalar _best_mse = var_est_mse4[1]
+        scalar _best_est_Mhat = var_est_Mhat[1]
+        scalar _best_est_Bhat = var_est_Bhat[1]
+        scalar _best_est_DMB = var_est_DMB[1]
 
         return scalar _best_q = var_est_mse1[1]
         return scalar _best_Int_u = var_est_mse2[1]
@@ -258,6 +353,9 @@ qui {
         return scalar _best_Int_l = var_est_mse3[1]
         return scalar _best_Int_l_show = -1 * var_est_mse3[1] + `=scalar(cutoff)'
         return scalar _best_mse = var_est_mse4[1]
+        return scalar _best_est_Mhat = var_est_Mhat[1]
+        return scalar _best_est_Bhat = var_est_Bhat[1]
+        return scalar _best_est_DMB = var_est_DMB[1]
 
         // save and return the 2nd best results
         scalar _2ndbest_q = var_est_mse1[2]
@@ -266,6 +364,9 @@ qui {
         scalar _2ndbest_Int_l = var_est_mse3[2]
         scalar _2ndbest_Int_l_show = -1 * var_est_mse3[2] + `=scalar(cutoff)'
         scalar _2ndbest_mse = var_est_mse4[2]
+        scalar _2ndbest_est_Mhat = var_est_Mhat[2]
+        scalar _2ndbest_est_Bhat = var_est_Bhat[2]
+        scalar _2ndbest_est_DMB = var_est_DMB[2]
 
         return scalar _2ndbest_q = var_est_mse1[2]
         return scalar _2ndbest_Int_u = var_est_mse2[2]
@@ -273,6 +374,9 @@ qui {
         return scalar _2ndbest_Int_l = var_est_mse3[2]
         return scalar _2ndbest_Int_l_show = -1 * var_est_mse3[2] + `=scalar(cutoff)'
         return scalar _2ndbest_mse = var_est_mse4[2]
+        return scalar _2ndbest_est_Mhat = var_est_Mhat[2]
+        return scalar _2ndbest_est_Bhat = var_est_Bhat[2]
+        return scalar _2ndbest_est_DMB = var_est_DMB[2]
 
     restore
 
@@ -309,6 +413,39 @@ qui {
             "--------------------------------------------------------------------------------" _newline ///
             ;
         #delimit cr
+    }
+
+    // print the M, B, and DMB
+    if "`meqb'" != "" | "`beqm'" != "" {
+        local _best_est_Mhat = _best_est_Mhat
+        local _best_est_Bhat = _best_est_Bhat
+        local _best_est_DMB = _best_est_DMB
+
+        #delimit ;
+        dis as red ///
+            "--------------------------------------------------------------------------------" _newline ///
+            "The Best Mhat: `_best_est_Mhat'"                          _newline ///
+            "The Best Bhat: `_best_est_Bhat'"                          _newline ///
+            "The Best DMB: `_best_est_DMB'"                            _newline ///
+            "--------------------------------------------------------------------------------" _newline ///
+            ;
+        #delimit cr
+
+        if "`second'" != "" {
+            local _2ndbest_est_Mhat = _2ndbest_est_Mhat
+            local _2ndbest_est_Bhat = _2ndbest_est_Bhat
+            local _2ndbest_est_DMB = _2ndbest_est_DMB
+
+            #delimit ;
+            dis as red ///
+                "--------------------------------------------------------------------------------" _newline ///
+                "The 2nd Best Mhat: `_2ndbest_est_Mhat'"                  _newline ///
+                "The 2nd Best Bhat: `_2ndbest_est_Bhat'"                  _newline ///
+                "The 2nd Best DMB: `_2ndbest_est_DMB'"                    _newline ///
+                "--------------------------------------------------------------------------------" _newline ///
+                ;
+            #delimit cr
+        }
     }
 }
 
@@ -368,6 +505,33 @@ qui {
     gen freq_predict_adj = freq_predict - _del_coef_I_total
     egen _est_B = sum(_del_coef_I_total)
     egen _est_predict_freqsum = sum(cond(_del_coef_I_total==0,.,freq_predict_adj))
+
+    // add vars for the dbm
+    if "`meqb'" != "" | "`beqm'" != "" {
+        // the actual - counterfactual
+        cap drop _freq_diff_acf
+        gen _freq_diff_acf = freq - freq_predict_adj
+
+        // calculate _est_Mhat and _est_Bhat
+        // Mhat is always positive
+        // Bhat is always negative
+        cap drop _est_Mhat
+        cap drop _est_Bhat
+        if "`meqb'" != "" {
+            egen _est_Mhat = sum(cond((__basis_bin_diff >= -1 * `Int_l' & __basis_bin_diff <= 0) & _freq_diff_acf > 0, _freq_diff_acf, .))
+            egen _est_Bhat = sum(cond((__basis_bin_diff > 0 & __basis_bin_diff <= `Int_u') & _freq_diff_acf < 0, _freq_diff_acf, .))
+
+            gen _I_forMhat = ((__basis_bin_diff >= -1 * `Int_l' & __basis_bin_diff <= 0) & _freq_diff_acf > 0)
+            gen _I_forBhat = ((__basis_bin_diff > 0 & __basis_bin_diff <= `Int_u') & _freq_diff_acf < 0)
+        }
+        else {
+            egen _est_Mhat = sum(cond((__basis_bin_diff >= 0 & __basis_bin_diff <= `Int_u') & _freq_diff_acf > 0, _freq_diff_acf, .))
+            egen _est_Bhat = sum(cond((__basis_bin_diff >= -1 * `Int_l' & __basis_bin_diff < 0) & _freq_diff_acf < 0, _freq_diff_acf, .))
+
+            gen _I_forMhat = ((__basis_bin_diff >= 0 & __basis_bin_diff <= `Int_u') & _freq_diff_acf > 0)
+            gen _I_forBhat = ((__basis_bin_diff >= -1 * `Int_l' & __basis_bin_diff < 0) & _freq_diff_acf < 0)
+        }
+    }
 
     // save _est_B and _est_b
     scalar _est_B = _est_B[1]
@@ -582,7 +746,7 @@ qui if "`yvar'" != "" {
 
     // gen dummy for within_interval
     cap drop _within_interval
-    gen _within_interval = (ynssde >= `zlt_intl' & ynssde <= `zlt_intu')
+    gen _within_interval = (__basis_bin >= `zlt_intl' & __basis_bin <= `zlt_intu')
 
     // generate poly terms
     forvalues power = 0/`_best_q' {
@@ -879,7 +1043,10 @@ qui use "__temp_datarestore.dta", clear
     cap rm "__temp_restore_forplot.dta"
     cap rm "_temp_simu_errors.dta"
 
-end // end of main program
+*** Clear related scalars in case of re-run ------------------------------------
+    clean_my_scalars 1
+
+end // end of main program *****************************************************
 
 *** Program: hall_bunching_plot ------------------------------------------------
 cap program drop hall_bunching_plot
@@ -929,7 +1096,7 @@ program define hall_bunching_plot
         xline(`right' , lc(gray%50) lp(dash)) ///
         xlabel(, nogrid angle(90)) ///
         `xlabel' ///
-        ylabel(, nogrid) ///
+        ylabel(, nogrid format(%9.2fc)) ///
         xtitle(`"{`font_ch' `xtitle'}"') ///
         ytitle(`"{`font_ch' `ytitle'}"') ///
         legend(off) ///
@@ -955,7 +1122,9 @@ program define clean_my_scalars
         _est_b _est_N _new_est_predict_freqsum ///
         _new_est_b _est_B_se _est_b_se zlt_intl zlt_intu _NUM_B_indicator ///
         ITT_real ITT_est_ITT_se ///
-        t_value _est_ITT_se ITT 
+        t_value _est_ITT_se ITT ///
+        _best_est_DMB _best_est_Bhat _best_est_Mhat ///
+        _2ndbest_est_DMB _2ndbest_est_Bhat _2ndbest_est_Mhat
     
     foreach sca in `sca_names' {
         cap scalar drop `sca'
