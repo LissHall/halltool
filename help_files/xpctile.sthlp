@@ -1,11 +1,15 @@
 {smcl}
-{* *! version 1.1 2023/06/25}{...}
+{* *! version 1.1 Jun 25'2024}{...}
 {hline}
-{cmd:help for {hi:xpctile}}{right: ({browse "https://econometrics.club/":blog})}{right: ({browse "https://github.com/LissHall/halltool":github})}
+{cmd:help for {hi:xpctile}}{right: ({browse "https://econometrics.club/":blog})}
+version 1.1, 25jun2024.{right: ({browse "https://github.com/LissHall/halltool":github})}
 {hline}
 
-{title:XPCTILE}
+{title:Title}
 
+{p2colset 5 18 20 2}{...}
+{p2col :{cmd:xpctile} {hline 2}}The percentile of a given value in a variable.{p_end}
+{p2colreset}{...}
 
 {title:Syntax}
 
@@ -46,5 +50,6 @@ The returned values are saved in {cmd: rclass}. Try {stata "return list":  retur
 E-mail: {browse "mailto:xyhao5-c@my.cityu.edu.hk":xyhao5-c@my.cityu.edu.hk}; {browse "mailto:lisshall717@gmail.com":lisshall717@gmail.com} {break}
 Blog: {browse "https://econometrics.club/":https://econometrics.club/} {break}
 Github: {browse "https://github.com/LissHall":https://github.com/LissHall} {break}
+Hall's Stata Toolbox: {browse "https://github.com/LissHall/halltool":https://github.com/LissHall/halltool} {break}
 {p_end}
 

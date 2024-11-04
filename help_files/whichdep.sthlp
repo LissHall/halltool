@@ -1,11 +1,16 @@
 {smcl}
 {* *! version 1.2 Nov 08, 2023}{...}
 {hline}
-{cmd:help for {hi:whichdep}}{right: ({browse "https://econometrics.club/":blog})}{right: ({browse "https://github.com/LissHall/halltool":github})}
+{cmd:help for {hi:whichdep}}{right: ({browse "https://econometrics.club/":blog})}
+version 1.2, 08nov2024.{right: ({browse "https://github.com/LissHall/halltool":github})}
 {hline}
 
-{title:Which Dependencies}
 
+{title:Title}
+
+{p2colset 5 18 20 2}{...}
+{p2col :{cmd:whichdep} {hline 2}}Install and update all specified dependencies.{p_end}
+{p2colreset}{...}
 
 {title:Syntax}
 
@@ -53,5 +58,6 @@ You can also use the net() option to give packages to be installed with {help ne
 E-mail: {browse "mailto:xyhao5-c@my.cityu.edu.hk":xyhao5-c@my.cityu.edu.hk}; {browse "mailto:lisshall717@gmail.com":lisshall717@gmail.com} {break}
 Blog: {browse "https://econometrics.club/":https://econometrics.club/} {break}
 Github: {browse "https://github.com/LissHall":https://github.com/LissHall} {break}
+Hall's Stata Toolbox: {browse "https://github.com/LissHall/halltool":https://github.com/LissHall/halltool} {break}
 {p_end}
 

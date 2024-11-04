@@ -5,9 +5,11 @@
 version 1.2, 23sep2024.{right: ({browse "https://github.com/LissHall/halltool":github})}
 {hline}
 
-{title:RM2}
+{title:Title}
 
-    Just like command {stata "help rm":rm/erase}, but more powerful.
+{p2colset 5 18 20 2}{...}
+{p2col :{cmd:rm2} {hline 2}}Just like command {stata "help rm":rm/erase}, but more powerful.{p_end}
+{p2colreset}{...}
 
 {title:Syntax}
 
@@ -78,5 +80,6 @@ This commands utilize the {stata "help rm":rm/erase} command to delete files. Th
 E-mail: {browse "mailto:xyhao5-c@my.cityu.edu.hk":xyhao5-c@my.cityu.edu.hk}; {browse "mailto:lisshall717@gmail.com":lisshall717@gmail.com} {break}
 Blog: {browse "https://econometrics.club/":https://econometrics.club/} {break}
 Github: {browse "https://github.com/LissHall":https://github.com/LissHall} {break}
+Hall's Stata Toolbox: {browse "https://github.com/LissHall/halltool":https://github.com/LissHall/halltool} {break}
 {p_end}
 

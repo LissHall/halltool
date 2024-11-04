@@ -39,5 +39,6 @@ version 1.0.0, 27oct2024.{right: ({browse "https://github.com/LissHall/halltool"
 E-mail: {browse "mailto:xyhao5-c@my.cityu.edu.hk":xyhao5-c@my.cityu.edu.hk}; {browse "mailto:lisshall717@gmail.com":lisshall717@gmail.com} {break}
 Blog: {browse "https://econometrics.club/":https://econometrics.club/} {break}
 Github: {browse "https://github.com/LissHall":https://github.com/LissHall} {break}
+Hall's Stata Toolbox: {browse "https://github.com/LissHall/halltool":https://github.com/LissHall/halltool} {break}
 {p_end}
 
