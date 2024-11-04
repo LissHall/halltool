@@ -1,5 +1,8 @@
+<p align='center'>
+    <img src='HallsSTATABox.svg' width='100%'/>
+</p>
 
-![hallstoolbox](https://github.com/LissHall/halltool/blob/main/HallsSTATABox.svg)
+
 # Hall's STATA Toolbox
 
 Commands included in Hall's ToolBox:
