@@ -2,9 +2,7 @@
     <img src='Anm_HallsSTATABox.svg' width='100%'/>
 </p>
 
-# Hall's STATA Toolbox
-
-Commands included in Hall's ToolBox:
+# Commands included in Hall's ToolBox:
 1. `whichdep`
    - Install and update all specified `ssc` and `net` packages at once. 
    - Add this command at the beginning of the do file to avoid errors due to uninstalled dependencies after sharing the do file.
