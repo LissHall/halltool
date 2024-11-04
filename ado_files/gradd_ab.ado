@@ -11,7 +11,7 @@
 cap program drop gradd_ab
 program define gradd_ab
 	
-	version 12
+	version 12.0
 	
 	syntax varlist(min=2 max=2) , ///
 		left(real) right(real) ///
