@@ -1,4 +1,4 @@
-v 1.5
+v 1.6
 d 'HALLTOOL': halltool
 d Hall's toolkit
 d Distribution-Date: 20241107
@@ -6,15 +6,15 @@ d License: MIT
 d 
 F /ado_files/whichdep.ado
 f /ado_files/xpctile.ado
-f /ado_files/haversine.ado
 f /ado_files/rm2.ado
 f /ado_files/get_sig_stars.ado
 f /ado_files/gradd_ab.ado
+f /ado_files/csv2dta.ado
 
 f /help_files/whichdep.sthlp
 f /help_files/xpctile.sthlp
-f /help_files/haversine.sthlp
 f /help_files/rm2.sthlp
+f /help_files/csv2dta.sthlp
 
 f /schemes/scheme-hall.scheme
 f /schemes/colorpalette_hallshue.ado

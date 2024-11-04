@@ -18,13 +18,15 @@ sysuse auto, clear
         (bar price_m foreign, barw(0.5)) ///
         (rcap errorbar_h errorbar_l foreign) ///
         , ///
-        ylabel(5000(1000)11000) ///
+        ylabel(2000(1000)11000) ///
         legend(off) ///
-        xlabel(0 "Domestic" 1 "Foreign") ///
-        saving(b1.gph, replace)
+        xlabel(0 "Domestic" 1 "Foreign") 
         
     *** Add asterisk brackets
     gradd_ab errorbar_h foreign, left(0) right(1) sig($sig_stars)
+
+    * add asterisk brackets >>> Down side
+    gradd_ab errorbar_l foreign, left(0) right(1) sig($sig_stars) dn
     
     *** Save the graph
     graph save b2.gph, replace

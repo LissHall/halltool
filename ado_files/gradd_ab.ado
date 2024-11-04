@@ -1,4 +1,6 @@
-*! version 1.1.0, Hall, 7oct2024
+*! version 1.1.1, Hall, 8oct2024..
+    // add up/dn option
+* version 1.1.0, Hall, 7oct2024
     // use _gm_edit
 * version 1.0.0, Hall, 5oct2024
 
@@ -6,22 +8,22 @@
 * lisshall717@gmail.com
 * add asterisk brackets to the current graph
 
-//cap program drop gradd_ab
+cap program drop gradd_ab
 program define gradd_ab
 	
 	version 12
 	
 	syntax varlist(min=2 max=2) , ///
-        [gname(string)] ///
 		left(real) right(real) ///
 		sig(string) ///
 		[ ///
+            gname(string) ///
 			gap(real 200) /// 1st var for error_bar; 2nd var for x-axis
 			len(real 500) ///
 			astgap(real 100) ///
 			color(string) ///
-			ast_gap ///
 			adlo(int 1) ///
+			up dn ///
 		]
 
 	* default
@@ -37,48 +39,87 @@ program define gradd_ab
         local gname "Graph"
     }
 	
-	* varlist
+	* check direction
+	if "`up'" == "" & "`dn'" == "" {
+        local up "up"
+    }
+
+    if "`up'" != "" & "`dn'" != "" {
+        di as err "up and dn cannot be both specified."
+        exit 999
+    }
+
+    *** varlist ----------------------------------------------------------------
 	local _var_eb : word 1 of `varlist'
 	local _x_var  : word 2 of `varlist'
 	
-	* _v_left_start and _v_right_start
-	qui su `_var_eb' if `_x_var' == `left' , meanonly
-	local _v_left_start = `r(mean)' + `gap'
-	qui su `_var_eb' if `_x_var' == `right' , meanonly
-	local _v_right_start = `r(mean)' + `gap'
-	
-	* _v_end
-	local _v_end = max(`_v_left_start' + `len' , `_v_right_start' + `len')
-	
-	* postion of asterisks
-	local ast_x = (`left' + `right')/2
-	local ast_y = `_v_end' + `astgap'
-	
+    *** UP Plot ----------------------------------------------------------------
+    if "`up'" != "" {
+
+        * _v_left_start and _v_right_start
+        qui su `_var_eb' if `_x_var' == `left' , meanonly
+        local _v_left_start = `r(mean)' + `gap'
+        qui su `_var_eb' if `_x_var' == `right' , meanonly
+        local _v_right_start = `r(mean)' + `gap'
+        
+        * _v_end
+        local _v_end = max(`_v_left_start' + `len' , `_v_right_start' + `len')
+        
+        * postion of asterisks
+        local ast_x = (`left' + `right')/2
+        local ast_y = `_v_end' + `astgap'
+    }
+    
+    *** DOWN Plot --------------------------------------------------------------
+    if "`dn'" != "" {
+
+        * _v_left_start and _v_right_start
+        qui su `_var_eb' if `_x_var' == `left' , meanonly
+        local _v_left_start = `r(mean)' - `gap'
+        qui su `_var_eb' if `_x_var' == `right' , meanonly
+        local _v_right_start = `r(mean)' - `gap'
+        
+        * _v_end
+        local _v_end = min(`_v_left_start' - `len' , `_v_right_start' - `len')
+        
+        * postion of asterisks
+        local ast_x = (`left' + `right')/2
+        local ast_y = `_v_end' - `astgap'
+    }
+
+    *** PLOT UP | DN -----------------------------------------------------------
 	* ADLOs
-	local adlo_1 = `adlo'
-	local adlo_2 = `adlo' + 1
-	local adlo_3 = `adlo' + 2
+	local adlo_1 = 2*`adlo'-1
+	local adlo_2 = `adlo_1' + 1
+	local adlo_3 = `adlo_1' + 2
 	
-	// left v
-	_add_line 1, gname(`gname') ///
-        x1(`left') y1(`_v_left_start') x2(`left') y2(`_v_end') adlo(`adlo_1') color(`color')
-	
-	// right v
-	_add_line 1, gname(`gname') ///
-        x1(`right') y1(`_v_right_start') x2(`right') y2(`_v_end') adlo(`adlo_2') color(`color')
-	
-	// line horizontal
-	_add_line 1, gname(`gname') ///
-        x1(`left') y1(`_v_end') x2(`right') y2(`_v_end') adlo(`adlo_3') color(`color')
-	
-	// add asterisks
-	_add_asterisks 1, gname(`gname') ///
-        x(`ast_x') y(`ast_y') adlo(`adlo_1') text(`sig') color(`color')
-	
-    .`gname'.drawgraph
+	*** PLOT
+    if "`up'" != "" | "`dn'" != "" {
+		
+        * left v
+        _add_line 1, gname(`gname') ///
+            x1(`left') y1(`_v_left_start') x2(`left') y2(`_v_end') adlo(`adlo_1') color(`color')
+        
+        * right v
+        _add_line 1, gname(`gname') ///
+            x1(`right') y1(`_v_right_start') x2(`right') y2(`_v_end') adlo(`adlo_2') color(`color')
+        
+        * line horizontal
+        _add_line 1, gname(`gname') ///
+            x1(`left') y1(`_v_end') x2(`right') y2(`_v_end') adlo(`adlo_3') color(`color')
+        
+        * add asterisks
+        _add_asterisks 1, gname(`gname') ///
+            x(`ast_x') y(`ast_y') adlo(`adlo') text(`sig') color(`color')
+        
+        .`gname'.drawgraph
+    }
+
+
+
 end
 
-//cap program drop _add_line
+//cap program drop _add_line //-------------------------------------------------
 program define _add_line
 	
 	syntax anything, gname(string) ///
@@ -116,7 +157,7 @@ program define _add_line
 end
 
 
-//cap program drop _add_asterisks
+//cap program drop _add_asterisks //--------------------------------------------
 program define _add_asterisks
 
 	syntax anything, gname(string) /// 
