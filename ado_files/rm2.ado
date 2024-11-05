@@ -7,7 +7,7 @@
 //cap program drop rm2
 program define rm2
     
-    version 12
+    version 12.0
     
     syntax [anything(name = filelist)] ///
         [, ///

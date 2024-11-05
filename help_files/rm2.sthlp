@@ -1,7 +1,9 @@
 {smcl}
 {* *! version 1.2, Sep 23'2024}{...}
+{vieweralsosee "halltool" "help halltool"}{...}
+{viewerjumpto "Authors" "rm2##contact"}{...}
 {hline}
-{cmd:help for {hi:rm2}}{right: ({browse "https://econometrics.club/":blog})}
+Command from {help halltool:Hall's Stata Toolbox}. help for {hi:rm2}{right: ({browse "https://econometrics.club/":blog})}
 version 1.2, 23sep2024.{right: ({browse "https://github.com/LissHall/halltool":github})}
 {hline}
 
@@ -23,7 +25,7 @@ version 1.2, 23sep2024.{right: ({browse "https://github.com/LissHall/halltool":g
 
 {title:Options}
 
-    filename: Zero, 1, or multiple file names. Separated by spaces
+    filename: 0, 1, or multiple file names. Separated by spaces
 
     {cmdab:T:}ype(filetype): One or multiple file types. Separated by spaces. 
                     All files with names ending in "filetype" will be deleted.
@@ -72,7 +74,7 @@ This commands utilize the {stata "help rm":rm/erase} command to delete files. Th
 {phang2} To delete -results.xls- and all .txt file in a specific folder{p_end}
 {phang2}{inp:.} rm2 results.xls, t(.txt) p("this/is/my/folder"){p_end}
 
-
+{marker contact}{...}
 {title:Author}
 
 {phang}

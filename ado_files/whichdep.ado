@@ -4,7 +4,7 @@
 
 cap program drop whichdep
 program define whichdep
-    version 15
+    version 15.0
     capture syntax anything(name = pkglist) [,net(string) Replace *] 
 
     if "`options'" != "" {

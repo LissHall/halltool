@@ -1,6 +1,6 @@
 
 * add asterisk brackets to the current graph
-
+graph close _all
 sysuse auto, clear
     
     *** get sig stars
@@ -20,20 +20,33 @@ sysuse auto, clear
         , ///
         ylabel(2000(1000)11000) ///
         legend(off) ///
-        xlabel(0 "Domestic" 1 "Foreign") 
+        xlabel(0 "Domestic" 1 "Foreign")
+	
+	graph save b1.gph, replace
         
-    *** Add asterisk brackets
-    gradd_ab errorbar_h foreign, left(0) right(1) sig($sig_stars)
+    *** Add asterisk brackets --------------------------------------------------
+	qui su errorbar_h in 1, mean
+	local y1 = r(mean)
+	qui su errorbar_h in 2, mean
+	local y2 = r(mean)
+	
+    gradd_ab , root1(0 `y1') root2(1 `y2') sig($sig_stars)
+	
+	graph save b2.gph, replace
 
-    * add asterisk brackets >>> Down side
-    gradd_ab errorbar_l foreign, left(0) right(1) sig($sig_stars) dn
-    
+    * add asterisk brackets >>> Down side --------------------------------------
+    qui su errorbar_l in 1, mean
+	local y1 = r(mean)
+	qui su errorbar_l in 2, mean
+	local y2 = r(mean)
+	
+    gradd_ab , root1(0 `y1') root2(1 `y2') sig($sig_stars) ///
+		d(down) astgap(150) adlo(2) color(orange)
+
     *** Save the graph
-    graph save b2.gph, replace
     graph combine b1.gph b2.gph, ///
         col(2)
     graph export _eg_gradd_ab.png, replace
 
     rm b1.gph
     rm b2.gph
-

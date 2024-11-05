@@ -1,8 +1,9 @@
 {smcl}
 {* *! version 1.0.0, Oct 27'2024}{...}
-
+{vieweralsosee "halltool" "help halltool"}{...}
+{viewerjumpto "Authors" "csv2dta##contact"}{...}
 {hline}
-{cmd:help for {hi:csv2dta}}{right: ({browse "https://econometrics.club/":blog})}
+Command from {help halltool:Hall's Stata Toolbox}. help for {hi:csv2dta}{right: ({browse "https://econometrics.club/":blog})}
 version 1.0.0, 27oct2024.{right: ({browse "https://github.com/LissHall/halltool":github})}
 {hline}
 
@@ -32,6 +33,7 @@ version 1.0.0, 27oct2024.{right: ({browse "https://github.com/LissHall/halltool"
     t(/Users/me/Downloads) /// {break}
     bindquote(strict) maxquotedrows(10000) clear  {p_end}
 
+{marker contact}{...}
 {title:Author}
 
 {phang}

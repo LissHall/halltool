@@ -3,7 +3,7 @@
 * lisshall717@gmail.com
 * get sig stars for p-value
 program define get_sig_stars, rclass
-    version 12
+    version 12.0
     syntax anything
     
     if `anything' < 0 {

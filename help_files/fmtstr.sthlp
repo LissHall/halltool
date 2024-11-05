@@ -1,8 +1,9 @@
 {smcl}
 {* *! version 1.0.0, Nov 4'2024}{...}
-
+{vieweralsosee "halltool" "help halltool"}{...}
+{viewerjumpto "Authors" "fmtstr##contact"}{...}
 {hline}
-{cmd:help for {hi:fmtstr}}{right: ({browse "https://econometrics.club/":blog})}
+Command from {help halltool:Hall's Stata Toolbox}. help for {hi:fmtstr}{right: ({browse "https://econometrics.club/":blog})}
 version 1.0.0, 4nov2024.{right: ({browse "https://github.com/LissHall/halltool":github})}
 {hline}
 
@@ -25,6 +26,7 @@ version 1.0.0, 4nov2024.{right: ({browse "https://github.com/LissHall/halltool":
 
     {cmdab:L:}en(integer): The display length of string variables. Default is 30. 
 
+{marker contact}{...}
 {title:Author}
 
 {phang}

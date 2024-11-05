@@ -5,7 +5,7 @@
 //cap program drop fmtstr
 program define fmtstr
     
-    version 12
+    version 12.0
     
     syntax [anything(name=fmtvars)] ///
 		[, ///

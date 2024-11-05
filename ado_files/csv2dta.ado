@@ -3,6 +3,7 @@
 cap program drop csv2dta
 program define csv2dta
 	
+	version 10.0
 	syntax [anything], From(str) To(str) *
 	
 	*** collect options

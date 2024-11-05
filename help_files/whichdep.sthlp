@@ -1,7 +1,9 @@
 {smcl}
 {* *! version 1.2 Nov 08, 2023}{...}
+{vieweralsosee "halltool" "help halltool"}{...}
+{viewerjumpto "Authors" "whichdeop##contact"}{...}
 {hline}
-{cmd:help for {hi:whichdep}}{right: ({browse "https://econometrics.club/":blog})}
+Command from {help halltool:Hall's Stata Toolbox}. help for {hi:whichdeop}{right: ({browse "https://econometrics.club/":blog})}
 version 1.2, 08nov2024.{right: ({browse "https://github.com/LissHall/halltool":github})}
 {hline}
 
@@ -15,7 +17,7 @@ version 1.2, 08nov2024.{right: ({browse "https://github.com/LissHall/halltool":g
 {title:Syntax}
 
 {p 4 19 2}
-{cmdab:whichdep} {varlist} ,  
+{cmdab:whichdep} name_list ,  
 [
 {cmdab:net:}{cmd:(}string{cmd:)}
 {cmdab:r:}eplace
@@ -25,7 +27,7 @@ version 1.2, 08nov2024.{right: ({browse "https://github.com/LissHall/halltool":g
 {title:Description}
 
 {p 4 4 2}
-{cmd:whichdep} checks whether the packages in the {varlist} are installed.
+{cmd:whichdep} checks whether the packages in the {cmd:name_list} are installed.
 Packages that are not installed will be installed using {help ssc install}. 
 You can also use the net() option to give packages to be installed with {help net install}.
 
@@ -50,7 +52,7 @@ You can also use the net() option to give packages to be installed with {help ne
 {phang2}{inp:.} {stata "whichdep winsor2 outreg2":  whichdep winsor2 outreg2}{p_end}
 {phang2}{inp:.}  whichdep winsor2 outreg2, net(dm79.pkg "http://www.stata.com/stb/stb56"){p_end}
 
-
+{marker contact}{...}
 {title:Author}
 
 {phang}

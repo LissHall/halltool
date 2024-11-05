@@ -1,7 +1,9 @@
 {smcl}
 {* *! version 1.1 Jun 25'2024}{...}
+{vieweralsosee "halltool" "help halltool"}{...}
+{viewerjumpto "Authors" "xpctile##contact"}{...}
 {hline}
-{cmd:help for {hi:xpctile}}{right: ({browse "https://econometrics.club/":blog})}
+Command from {help halltool:Hall's Stata Toolbox}. help for {hi:xpctile}{right: ({browse "https://econometrics.club/":blog})}
 version 1.1, 25jun2024.{right: ({browse "https://github.com/LissHall/halltool":github})}
 {hline}
 
@@ -43,6 +45,7 @@ The returned values are saved in {cmd: rclass}. Try {stata "return list":  retur
 {phang2}{inp:.} {stata "dis r(pct)":  dis r(pct)}{p_end}
 {phang2}{inp:.}  {space 8}90.540541{p_end}
 
+{marker contact}{...}
 {title:Author}
 
 {phang}
