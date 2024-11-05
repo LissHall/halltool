@@ -12,9 +12,11 @@ f /ado_files/gradd_ab.ado
 f /ado_files/csv2dta.ado
 f /ado_files/fmtstr.ado
 
+f /help_files/halltool.sthlp
 f /help_files/whichdep.sthlp
 f /help_files/xpctile.sthlp
 f /help_files/rm2.sthlp
+f /ado_files/gradd_ab.sthlp
 f /help_files/csv2dta.sthlp
 f /help_files/fmtstr.sthlp
 

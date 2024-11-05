@@ -39,9 +39,3 @@ You can install [`halltool`](https://github.com/LissHall/halltool) using [`githu
     github install LissHall/halltool
     help rm2
 ```
-
-and uninstall:
-
-```{stata}
-    github uninstall halltool
-```
