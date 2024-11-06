@@ -13,7 +13,7 @@
    - Delete multiple files and delete files by file types in one command.
    - Avoid errors due to file not found.
 4. `gradd_ab`
-   - Add asterisk brackets to a bar graph.
+   - Add asterisk brackets to a graph.
 <div>
 <p align="center" width="100%">
     <img alt="_eg_gradd_ab" src="https://github.com/LissHall/halltool/blob/main/pngs/_eg_gradd_ab.png?raw=true" style="width:75%;"/>
@@ -37,5 +37,6 @@ You can install [`halltool`](https://github.com/LissHall/halltool) using [`githu
 
     * Install halltool from github
     github install LissHall/halltool
+    help halltool
     help rm2
 ```
