@@ -1,5 +1,6 @@
-*! version 1.2 08 Nov 2023
-*! version 1.1 09 May 2023
+*! version 1.3 09 Nov 2024
+* version 1.2 08 Nov 2023
+* version 1.1 09 May 2023
 *! Xinya Hao (Hall) xyhao5-c@my.cityu.edu.hk
 
 cap program drop whichdep
@@ -26,7 +27,17 @@ program define whichdep
         }
         else {
             qui capture which `pkg'
-            if _rc == 0 {
+			local _rc1 `:dis _rc'
+			qui cap ado des `pkg'
+			local _rc2 `:dis _rc'
+			if `_rc1' == 0 | `_rc2' == 0 {
+				local _rc_check = 0
+			}
+			else {
+				local _rc_check = 111
+			}
+			
+            if `_rc_check' == 0 {
                 dis as text "-`pkg'- already installed. Will not re-install."
                 continue
             }

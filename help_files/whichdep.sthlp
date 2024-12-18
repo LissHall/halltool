@@ -1,10 +1,10 @@
 {smcl}
-{* *! version 1.2 Nov 08, 2023}{...}
+{* *! version 1.3 Nov 09, 2024}{...}
 {vieweralsosee "halltool" "help halltool"}{...}
 {viewerjumpto "Authors" "whichdeop##contact"}{...}
 {hline}
 Command from {help halltool:Hall's Stata Toolbox}. help for {hi:whichdeop}{right: ({browse "https://econometrics.club/":blog})}
-version 1.2, 08nov2024.{right: ({browse "https://github.com/LissHall/halltool":github})}
+version 1.3, 09nov2024.{right: ({browse "https://github.com/LissHall/halltool":github})}
 {hline}
 
 
