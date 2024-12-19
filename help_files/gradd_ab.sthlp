@@ -13,13 +13,21 @@ version 1.2.0, 5nov2024.{right: ({browse "https://github.com/LissHall/halltool":
 {p2col :{cmd:gradd_ab} {hline 2}}Add asterisk brackets to a graph.{p_end}
 {p2colreset}{...}
 
-            |        *
-            |    --------
-            |    |      |
-            |    |      |
-            |    |      *
-            |    *
-             ————————————————
+	      {it:y}
+	      {c |}
+	      {c |}         sig(string)
+	      {c |}    {c TLC}{hline 10}{c TRC}
+	      {c |}    {c |}          {c |}
+	      {c |}    {c |}          {c |}root2(x2,y2)
+	      {c |}    {c |}        {c TLC}{hline 3}{c TRC}
+	      {c |}    {c |}root(x1,y1) {c |}
+	      {c |}  {c TLC}{hline 3}{c TRC}      {c |}   {c |}
+	      {c |}  {c |}   {c |}      {c |}   {c |}
+	      {c |}  {c |}   {c |}      {c |}   {c |}
+	      {c |}  {c |}   {c |}      {c |}   {c |}
+	      {c BLC}{hline 2}{c BT}{hline 3}{c BT}{hline 6}{c BT}{hline 3}{c BT}{hline 9} {it:x}
+		 First      Second    {bf:...}
+		 group       group
 {title:Syntax}
 
 {p 4 19 2}
