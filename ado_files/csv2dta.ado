@@ -1,6 +1,6 @@
 *! version 1.0.0, Hall, 27oct2024
 *** Xform all the csv in a folder to dta
-cap program drop csv2dta
+//cap program drop csv2dta
 program define csv2dta
 	
 	version 10.0

@@ -3,7 +3,7 @@
 * version 1.1 09 May 2023
 *! Xinya Hao (Hall) xyhao5-c@my.cityu.edu.hk
 
-cap program drop whichdep
+//cap program drop whichdep
 program define whichdep
     version 15.0
     capture syntax anything(name = pkglist) [,net(string) Replace *] 

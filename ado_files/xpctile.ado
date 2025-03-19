@@ -1,6 +1,6 @@
 *! version 1.1.0 Hall 21jun2023
 * Xinya Hao (Hall) xyhao5-c@my.cityu.edu.hk
-cap program drop xpctile
+//cap program drop xpctile
 program define xpctile, rclass
     version 12.0
     syntax varlist(min=1 max=1) [if] [in], Xval(real)

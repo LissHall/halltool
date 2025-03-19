@@ -1,10 +1,10 @@
 {smcl}
-{* *! version 1.6 Nov 07'2024}{...}
+{* *! version 1.7 Mar 19'2025}{...}
 {vieweralsosee "halltool" "help halltool"}{...}
 {viewerjumpto "Authors" "halltool##contact"}{...}
 {hline}
 {help halltool:Hall's Stata Toolbox} {right: ({browse "https://econometrics.club/":blog})}
-version 1.6, 07nov2024.{right: ({browse "https://github.com/LissHall/halltool":github})}
+version 1.7, 19mar2025.{right: ({browse "https://github.com/LissHall/halltool":github})}
 {hline}
 
 {title:Hall's STATA Toolbox}
@@ -17,6 +17,7 @@ version 1.6, 07nov2024.{right: ({browse "https://github.com/LissHall/halltool":g
 {phang}4. {help gradd_ab:gradd_ab}: Add asterisk brackets to a graph. {p_end}
 {phang}5. {help csv2dta:csv2dta}: Import all .csv file(s) from a folder and save as .dta. {p_end}
 {phang}6. {help fmtstr:fmtstr}: Format the display lenth of multiple string variables. {p_end}
+{phang}7. {help appdtas:appdtas}: Append all .dta files into one .dta file. {p_end}
 
 
 {marker contact}{...}

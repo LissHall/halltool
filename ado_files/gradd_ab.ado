@@ -10,7 +10,7 @@
 * lisshall717@gmail.com
 * add asterisk brackets to the current graph
 
-cap program drop gradd_ab
+//cap program drop gradd_ab
 program define gradd_ab
 	
 	version 12.0
