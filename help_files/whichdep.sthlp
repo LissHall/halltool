@@ -39,11 +39,11 @@ You can also use the net() option to give packages to be installed with {help ne
 {p 4 4 2}{cmd:net(}{it:string}{cmd:)} specifies the packages and addresses for net install. 
 
 
-{phang2}{inp:.}  whichdep pkg0 , net(pkg1 "add1" pkg2 "add2"){p_end}
+{phang2}{inp:.}  whichdep pkg0 , net("gr0075.pkg" "nofrom" pkg2 "add2"){p_end}
 
     Same as:
 {phang2}{inp:.}  ssc install pkg0{p_end}
-{phang2}{inp:.}  net install pkg1, from("add1"){p_end}
+{phang2}{inp:.}  net install gr0075.pkg{p_end}
 {phang2}{inp:.}  net install pkg2, from("add2"){p_end}
 
 

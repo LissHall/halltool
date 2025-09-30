@@ -1,6 +1,9 @@
-*! version 1.3 09 Nov 2024
-* version 1.2 08 Nov 2023
-* version 1.1 09 May 2023
+*! version 1.3.1 30 JUL 2025 
+    // allow net from nofrom
+    // replace also works for net install
+* version 1.3.0  09 Nov 2024
+* version 1.2.0  08 Nov 2023
+* version 1.1.0  09 May 2023
 *! Xinya Hao (Hall) xyhao5-c@my.cityu.edu.hk
 
 //cap program drop whichdep
@@ -69,7 +72,23 @@ program define whichdep
             }
 
             local j = `i' + 1
-            cap net install "``i''" , from("``j''")
+
+            * call replace
+            if "`replace'" == "replace" {
+                local NetReplaceCall = "replace"
+            }
+            else {
+                local NetReplaceCall = ""
+            }
+
+            * allow nofrom
+            if "``j''" == "nofrom" {
+                cap net install "``i''", `NetReplaceCall'
+            }
+            else {
+                cap net install "``i''" , from("``j''") `NetReplaceCall'
+            }
+
             if _rc != 0 {
                 local fail_install = "`fail_install' ``i''"
             }
