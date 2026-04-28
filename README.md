@@ -2,7 +2,11 @@
     <img src='Anm_HallsSTATABox.svg' width='100%'/>
 </p>
 
+![Version](https://img.shields.io/badge/version-1.6.0-blue)
+
 # Commands included in Hall's ToolBox:
+0. `halltool`
+   - A command to display all the commands in this package and their functions.
 1. `whichdep`
    - Install and update all specified `ssc` and `net` packages at once. 
    - Add this command at the beginning of the do file to avoid errors due to uninstalled dependencies after sharing the do file.
@@ -23,7 +27,9 @@
 
 5. `csv2dta`
    - Transform all the .csv in a folder to .dta in one command.
-6. `fmtstr`
+6. `dta2csv`
+   - Transform all the .dta in a folder to .csv in one command.
+7. `fmtstr`
    - Format long string variables in one command.
 
 
